@@ -3,7 +3,7 @@
 .vscode/
 
 # Codex / AI
-.codex/
+.codex
 
 # OS
 .DS_Store
