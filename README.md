@@ -28,7 +28,7 @@ Goal: get a Go developer job in 3–6 months.
 ## 🗺️ Roadmap
 
 See my progress here:
-👉 [roadmap.md](./roadmap.md)
+👉 [roadmap.md](roadmap_v0.md)
 
 ---
 

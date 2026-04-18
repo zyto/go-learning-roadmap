@@ -2,6 +2,9 @@
 .idea/
 .vscode/
 
+# Old files
+old_files/
+
 # Codex / AI
 .codex
 
