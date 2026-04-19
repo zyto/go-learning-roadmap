@@ -3,9 +3,9 @@ package main
 import "fmt"
 
 func main() {
-	var nums []int
+	var nums = [5]int{1, 3, 5, 7, 9}
 
-	fmt.Println(nums)
-	fmt.Println(len(nums))
-	fmt.Println(cap(nums))
+	for i := 0; i < len(nums); i++ {
+		fmt.Println(nums[i])
+	}
 }
