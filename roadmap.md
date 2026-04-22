@@ -11,7 +11,7 @@
 
 # Snapshot
 
-* Последний завершённый урок: `Day 08`
+* Последний завершённый урок: `Day 09`
 * Текущая фаза: `Phase 1 — Core Go Foundations`
 ---
 
@@ -592,6 +592,7 @@ Codex используется как:
 | 2026-04-19 | 06   | lessons/day06.md | slice: shorthand, make, range, copy | завершено |
 | 2026-04-20 | 07   | lessons/day07.md | map: zero value, ok-идиома, delete, частотный словарь, set | завершено |
 | 2026-04-21 | 08   | lessons/day08.md | string, byte, rune, UTF-8 | завершено |
+| 2026-04-22 | 09   | lessons/day09.md | stdlib для коллекций и строк: slices, maps, strings, strconv | завершено |
 
 ---
 # Практически отработано
@@ -617,6 +618,9 @@ Codex используется как:
 * решены задачи на `string`, `byte`, `rune`, `UTF-8`: `len(string)`, индексация строки, `[]byte`, `[]rune`, изменение строки, реверс, фильтрация символов, частотный словарь по `rune`
 * проведено review решений по `day08`
 * проведён устный разбор по теме `string`, `byte`, `rune`, `UTF-8` в формате mock interview
+* решены задачи на stdlib для коллекций и строк: `slices.Contains`, `slices.Index`, `slices.Equal`, `slices.Sort`, `maps.Clone`, `maps.Copy`, `maps.Equal`, `strings.Contains`, `strings.HasPrefix`, `strings.HasSuffix`, `strings.Split`, `strings.Fields`, `strings.Join`, `strings.TrimSpace`, `strings.ToLower`, `strconv.Itoa`, `strconv.Atoi`
+* проведено review решений по `day09`
+* проведён устный разбор по теме stdlib для коллекций и строк в формате mock interview
 ---
 
 # Политика обновления roadmap
