@@ -11,7 +11,7 @@
 
 # Snapshot
 
-* Последний завершённый урок: `Day 09`
+* Последний завершённый урок: `Day 10`
 * Текущая фаза: `Phase 1 — Core Go Foundations`
 ---
 
@@ -593,6 +593,7 @@ Codex используется как:
 | 2026-04-20 | 07   | lessons/day07.md | map: zero value, ok-идиома, delete, частотный словарь, set | завершено |
 | 2026-04-21 | 08   | lessons/day08.md | string, byte, rune, UTF-8 | завершено |
 | 2026-04-22 | 09   | lessons/day09.md | stdlib для коллекций и строк: slices, maps, strings, strconv | завершено |
+| 2026-04-23 | 10   | lessons/day10.md | функции: параметры, несколько return values, variadic functions, разбиение решения на маленькие функции | завершено |
 
 ---
 # Практически отработано
@@ -621,6 +622,9 @@ Codex используется как:
 * решены задачи на stdlib для коллекций и строк: `slices.Contains`, `slices.Index`, `slices.Equal`, `slices.Sort`, `maps.Clone`, `maps.Copy`, `maps.Equal`, `strings.Contains`, `strings.HasPrefix`, `strings.HasSuffix`, `strings.Split`, `strings.Fields`, `strings.Join`, `strings.TrimSpace`, `strings.ToLower`, `strconv.Itoa`, `strconv.Atoi`
 * проведено review решений по `day09`
 * проведён устный разбор по теме stdlib для коллекций и строк в формате mock interview
+* решены задачи на функции: параметры, несколько return values, variadic functions, `(value, ok)`, разбиение решения на маленькие функции
+* проведено review решений по `day10`
+* проведён устный разбор по теме функций в формате mock interview
 ---
 
 # Политика обновления roadmap
