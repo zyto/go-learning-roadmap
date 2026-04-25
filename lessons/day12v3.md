@@ -1429,6 +1429,8 @@ func parseAge(text string) (int, error)
 ```go
 func findWord(words []string, target string) (int, bool)
 func parseLimit(text string) (int, error)
+```
+
 findWord должна искать слово target в words.
 
 Ожидаемое поведение:
