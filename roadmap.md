@@ -12,7 +12,7 @@
 
 # Snapshot
 
-* Последний завершённый урок: `Day 12`
+* Последний завершённый урок: `Day 13`
 * Текущая фаза: `Phase 1 — Core Go Foundations`
 ---
 
@@ -225,23 +225,23 @@ Codex используется как:
 ### Темы
 
 * синтаксис и управление потоком:
-  `if / else`, `switch`, `for`, `break`, `continue`, вложенные циклы
+  `if / else`, `switch`, `for`, `break`, `continue`, вложенные циклы, `range`, off-by-one и границы циклов
 * структуры данных:
-  `array`, `slice`, `map`, `string`, `byte`, `rune`
+  `array`, `slice`, `map`, `string`, `byte`, `rune`, продвинутые операции со `slice`: full slice expression, preallocation, delete / insert, `clear`
 * функции и организация кода:
-  параметры, return values, variadic functions, `defer`, scope
+  параметры, return values, named return values обзорно, variadic functions, анонимные функции, замыкания, `defer`, scope
 * типы и поведение:
-  pointers, value semantics, `struct`, методы, pointer/value receiver, базовые интерфейсы
+  базовые числовые типы `int`, `int64`, `uint`, `float64`, явные преобразования типов, переполнение и округление обзорно, `const`, typed / untyped constants, именованные типы, enum-like constants, bit flags, pointers, value semantics, `new` vs `make`, `struct`, struct tags, методы, method set, pointer/value receiver, базовые интерфейсы, nil-interface trap, type assertion / type switch обзорно
 * надежность:
-  `error`, wrapping, `errors.Is`, `errors.As`
+  `error`, wrapping, `errors.Is`, `errors.As`, sentinel errors, typed errors обзорно, `errors.Join` обзорно, `panic`, `recover` обзорно
 * устройство кода:
   `package`, экспорт, stdlib-first mindset
 * базовый toolchain:
-  `go run`, `go build`, `go fmt`, `go test`
+  `go run`, `go build`, `go fmt`, `go test`, `goimports`, `go vet`, обзорно `staticcheck` / `golangci-lint`
 * базовое тестирование:
-  функция, ожидаемый результат, простые unit tests, первые table-driven tests
+  функция, ожидаемый результат, простые unit tests, первые table-driven tests, subtests `t.Run`, `t.Helper`, `t.Cleanup`
 * прикладная стандартная библиотека:
-  `encoding/json`, `os`, `io`, `bufio`, `time`, `context`, `flag`
+  `fmt`, `strconv`, `strings`, `bytes`, `slices`, `maps`, `sort`, `encoding/json`, `os`, `io`, `bufio`, `time`, `context`, `flag`
 
 ### Явная последовательность уроков
 
@@ -256,20 +256,22 @@ Codex используется как:
 * `Day 12` — `error` и `defer`: ошибки как значения, early return, `fmt.Errorf`, базовое оборачивание ошибок, безопасное закрытие ресурсов через `defer`
 * `Day 13` — указатели и value semantics: когда передаётся копия, когда нужен указатель, как безопасно менять данные
 * `Day 14` — `struct`: объявление, литералы, zero value, вложение структур, DTO-подобные модели; алгоритмы: работа со списком структур, поиск и группировка по полям; паттерны: `DTO` как прикладной паттерн модели данных
-* `Day 15` — методы: value receiver, pointer receiver, базовое поведение методов на структурах; паттерны: `Factory function` в более осмысленном виде через корректную инициализацию структур
-* `Day 16` — функции как значения, анонимные функции и замыкания: присваивание функции в переменную, передача функции как аргумента, возврат функции из функции, `func` types, function literals, closures, базовые риски захвата переменных; мостик к интерфейсам и `Strategy`
-* `Day 17` — интерфейсы: маленькие интерфейсы, implicit implementation, why interface lives on consumer side, без premature abstraction; паттерны: `Strategy`, `Adapter`
-* `Day 18` — toolchain и тесты: `go mod`, `go fmt`, `go build`, `go test`, первые unit tests, table-driven tests на базовом уровне; алгоритмы: тестирование фильтрации, частотного словаря, `min/max`, поиска
-* `Day 19` — файлы, `io`, `bufio`, `encoding/json`: чтение, запись, простая сериализация и десериализация; алгоритмы: transform/filter/group на данных из файла или JSON; паттерны: `DTO`, при необходимости лёгкий `Facade` вокруг чтения и преобразования данных
-* `Day 20` — `time`, `context`, env vars, базовый CLI через `flag`: практичные основы для консольных утилит и будущего backend-кода
-* `Day 21` — мини-проект `Phase 1`: консольная утилита с пакетами, ошибками, JSON или файлами, базовыми тестами и review; алгоритмы: интеграция фильтрации, lookup, агрегации, сортировки или группировки по теме проекта; паттерны: `Factory function`, `Facade`, при уместности лёгкий `Adapter`
+* `Day 15` — `const`, именованные типы и enum-like constants: объявление констант, typed vs untyped constants, группировка `const (...)`, пользовательские типы на базе `string` и `int`, `iota`, enum-like значения для статусов и категорий, валидация допустимых значений, `switch` по enum-like типу; bit flags: `1 << iota`, битовые операторы `&`, `|`, `^`, `&^`, `<<`, `>>` на прикладном уровне без ухода в низкоуровневую оптимизацию; связь со `struct`: поля структуры с пользовательским типом вроде `OrderStatus`; связь с будущими методами: подготовка к методам `IsValid`, `String` и value receiver без premature deep dive; прикладные сценарии: статусы заказов, роли пользователей, категории товаров, наборы permissions / feature flags
+* `Day 16` — методы: value receiver, pointer receiver, базовое поведение методов на структурах; method set: почему `T` и `*T` видят разные наборы методов в важных сценариях; `fmt.Stringer` как первый стандартный интерфейс вокруг метода `String() string`; методы на именованных slice-типах вроде `type Items []Item`; паттерны: `Factory function` в более осмысленном виде через корректную инициализацию структур, методы валидации enum-like полей и структур
+* `Day 17` — функции как значения, анонимные функции и замыкания: присваивание функции в переменную, передача функции как аргумента, возврат функции из функции, `func` types, function literals, closures, базовые риски захвата переменных; named return values и naked return только обзорно как конструкция, которую нужно уметь читать, но не использовать без причины; мостик к интерфейсам и `Strategy`
+* `Day 18` — интерфейсы: маленькие интерфейсы, implicit implementation, why interface lives on consumer side, без premature abstraction; nil-interface trap: интерфейсное значение как пара `(type, value)`; `any` / `interface{}`: когда допустимо и когда вредно; type assertion `v, ok := x.(T)` и type switch обзорно; композиция интерфейсов на базовом уровне; паттерны: `Strategy`, `Adapter`
+* `Day 19` — toolchain и тесты: `go mod`, `go fmt`, `goimports`, `go build`, `go vet`, `go test`, первые unit tests, table-driven tests, subtests `t.Run`, `t.Helper`, `t.Cleanup`; обзорно `staticcheck` / `golangci-lint` и зачем линтеры нужны до CI; алгоритмы: тестирование фильтрации, частотного словаря, `min/max`, поиска; фейки и стабы через интерфейсы только на простом уровне, без mocks everywhere
+* `Day 20` — файлы, `io`, `bufio`, `encoding/json`: чтение, запись, простая сериализация и десериализация; struct tags: `json:"field,omitempty"` и связь с экспортируемыми полями; `io.Reader` / `io.Writer` как базовая абстракция ввода-вывода; `bytes.Buffer`, `strings.Builder`; `io.Copy`, `io.LimitReader`, `io.TeeReader` обзорно; алгоритмы: transform/filter/group на данных из файла или JSON; паттерны: `DTO`, при необходимости лёгкий `Facade` вокруг чтения и преобразования данных
+* `Day 21` — `time`, `context`, env vars, базовый CLI через `flag`: практичные основы для консольных утилит и будущего backend-кода
+* `Day 22` — catch-up и систематизация `Phase 1` перед мини-проектом: ранняя база, которую важно закрыть перед backend-фазой — `var` vs `:=`, множественное присваивание, `fmt.Printf` (`%v`, `%T`, `%d`, `%s`, `%q`), `fmt.Scan` / `fmt.Fscan` обзорно, шаблон `read -> parse -> compute -> print`, числовые типы `int`, `int64`, `uint`, `float64`, явные преобразования типов, деление `int / int`, переполнение и округление обзорно; продвинутые `slice`: full slice expression `s[a:b:c]`, preallocation `make([]T, 0, cap)`, stable / unstable remove, insert, `clear`, `slices.Delete`, `slices.Insert`; указатели: `new(T)` vs `make`, адрес range-переменной, escape analysis обзорно; ошибки: `errors.Join`, typed errors + `errors.As`, `recover` как граница аварийного восстановления; цель дня — закрыть пробелы без превращения в отдельную большую фазу
+* `Day 23` — мини-проект `Phase 1`: консольная утилита с пакетами, ошибками, JSON или файлами, базовыми тестами и review; алгоритмы: интеграция фильтрации, lookup, агрегации, сортировки или группировки по теме проекта; паттерны: `Factory function`, `Facade`, при уместности лёгкий `Adapter`
 
 ### Паттерны и антипаттерны
 
 * паттерны:
-  early return, guard clauses, small functions, zero value friendly design, composition over inheritance
+  early return, guard clauses, small functions, zero value friendly design, composition over inheritance, read -> parse -> compute -> print, stable output через сортировку ключей, explicit ownership для `slice` через copy / clone, typed constants для статусов и ролей, интерфейсы на стороне потребителя
 * антипаттерны:
-  лишняя вложенность, premature abstraction, интерфейсы "на будущее", `panic` вместо `error`, размытые имена вроде `utils` / `helpers`
+  лишняя вложенность, premature abstraction, интерфейсы "на будущее", `panic` вместо `error`, `recover` как обычная обработка ошибок, злоупотребление `any`, злоупотребление naked return, ожидание стабильного порядка от `map`, адрес range-переменной, неосознанный aliasing `slice`, размытые имена вроде `utils` / `helpers`
 
 ### Алгоритмический минимум
 
@@ -280,12 +282,15 @@ Codex используется как:
 * поиск дубликатов
 * реверс строки с учетом `rune`
 * двумерный проход через вложенные циклы
+* stable / unstable remove из `slice`
+* вставка элемента в `slice`
+* группировка и агрегация списка структур
 
 ### Результат фазы
 
-* 40-50 маленьких упражнений
+* 60-80 маленьких упражнений
 * 1 консольный мини-проект
-* 5-10 простых unit tests
+* 10-15 простых unit tests
 * 2 mini mock interview
 
 ## Phase 2 — Backend Basics in Go
@@ -598,6 +603,7 @@ Codex используется как:
 | 2026-04-23 | 10   | lessons/day10.md | функции: параметры, несколько return values, variadic functions, разбиение решения на маленькие функции | завершено |
 | 2026-04-24 | 11   | lessons/day11.md | package, import, структура маленького проекта, экспортируемые и неэкспортируемые имена | завершено |
 | 2026-04-25 | 12   | lessons/day12v3.md | error и defer: ошибки как значения, early return, fmt.Errorf, wrapping, errors.Is, panic vs error, безопасная очистка через defer | завершено |
+| 2026-05-02 | 13   | lessons/day13.md | указатели и value semantics: копии, адреса, nil pointer, изменение через указатель, поведение array/slice/map при передаче в функцию | завершено |
 
 ---
 # Практически отработано
@@ -635,6 +641,10 @@ Codex используется как:
 * решены задачи на `error` и `defer`: `errors.New`, `fmt.Errorf`, wrapping через `%w`, `errors.Is`, `(value, ok)` vs `(value, error)`, `panic` vs `error`, порядок выполнения `defer`, cleanup ресурсов
 * проведено review решений по `day12`
 * проведён устный разбор по теме `error`, wrapping, `errors.Is`, `defer`, `panic` и `os.Exit` в формате mock interview
+* решены задачи на указатели и value semantics: передача по значению, `&`, `*`, `*int`, `nil pointer`, безопасное разыменование, изменение значения через указатель
+* на практике разобрано поведение `array`, `slice` и `map` при передаче в функцию, включая копирование массива, изменение элементов `slice`, возврат результата `append` и замену `map`
+* проведено review решений по `day13`
+* проведён устный разбор по теме указателей, `nil`, `array` / `slice` / `map` и `append` в формате mock interview
 ---
 
 # Политика обновления roadmap
